@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import FormEdit from './FormEdit.js';
 import './App.css';
