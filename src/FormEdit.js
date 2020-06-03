@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-class FormEdit extends Component {
+export default class FormEdit extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -10,9 +11,11 @@ class FormEdit extends Component {
     };
     this.baseState = this.state;
   }
+
   edit = () => {
     this.setState({ edit: true });
   };
+
   save = () => {
     this.baseState = this.state;
     this.setState({ edit: false });
@@ -20,8 +23,8 @@ class FormEdit extends Component {
 
   cancel = () => {
     this.setState({
-      firstName: this.currentState.firstName,
-      lastName: this.currentState.lastName,
+      firstName: this.baseState.firstName,
+      lastName: this.baseState.lastName,
       edit: false
     });
   };
@@ -32,6 +35,40 @@ class FormEdit extends Component {
     });
   };
 
-  render() {}
+  render(){
+    if(this.state.edit===false){
+        return (
+            <div id="form">
+                <p>First name: {this.state.firstName}</p>
+                <p>Last name: {this.state.lastName}</p>
+                <button onClick={this.edit}>edit</button>
+            </div>
+        )
+    }
+    else
+        return(
+            <div id="form">
+            <input
+              className="firstchange"
+              type="text"
+              name="firstName"
+              onChange={this.handleChange}
+              placeholder={this.state.firstName}
+            />
+            <input
+              className="lastchange"
+              type="text"
+              name="lastName"
+              placeholder={this.state.lastName}
+              onChange={this.handleChange}
+            />
+            <button className="savebutton" onClick={this.save}>
+              save
+            </button>
+            <button className="cancelbutton" onClick={this.cancel}>
+              cancel
+            </button>
+          </div>
+        )
+  }
 }
-export default FormEdit;
